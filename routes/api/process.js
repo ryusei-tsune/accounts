@@ -5,14 +5,7 @@ const router = express.Router();
 require("dotenv").config();
 const MongoDB = require("mongodb");
 const MongoClient = MongoDB.MongoClient;
-const mongouri =
-  "mongodb+srv://" +
-  process.env.USER +
-  ":" +
-  process.env.PASS +
-  "@" +
-  process.env.MONGOHOST;
-
+const mongouri = `mongodb+srv://${process.env.USER}:${process.env.PASS}@${process.env.MONGOHOST}`;
 const client = new MongoClient(mongouri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -42,4 +35,29 @@ router.get("/acquisition/:id", async (req, res, next) => {
   }
 });
 
+router.post("/registering/:type", async (req, res, next) => {
+  try {
+    await client.connect();
+    const db = client.db(process.env.DB);
+
+    var collection;
+    const type = req.params.type;
+    if (type == "expense") {
+      collection = db.collection("expense");
+    } else {
+      collection = db.collection("income");
+    }
+
+    const data = JSON.parse(req.body); // 保存対象
+    console.log(data);
+    await collection.insertMany(data);
+
+    res.status(200); // HTTP ステータスコード返却
+    client.close(); // DB を閉じる
+  } catch (err) {
+    //console.log(err?.message);
+    console.log(err);
+    res.json({ err: true });
+  }
+});
 module.exports = router;
