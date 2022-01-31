@@ -60,4 +60,30 @@ router.post("/registering/:type", async (req, res, next) => {
     res.json({ err: true });
   }
 });
+
+router.delete("/item/:type", async (req, res, next) => {
+  try {
+    await client.connect();
+    const db = client.db(process.env.DB);
+
+    var collection;
+    const type = req.params.type;
+    if (type == "expense") {
+      collection = db.collection("expense");
+    } else {
+      collection = db.collection("income");
+    }
+
+    const id = JSON.parse(req.body); // 保存対象
+    console.log(id);
+    await collection.deleteOne({ _id: new MongoDB.ObjectId(id.id) });
+
+    res.status(200); // HTTP ステータスコード返却
+    client.close(); // DB を閉じる
+  } catch (err) {
+    //console.log(err?.message);
+    console.log(err);
+    res.json({ err: true });
+  }
+});
 module.exports = router;
