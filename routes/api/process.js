@@ -1,34 +1,45 @@
 const express = require("express");
 const router = express.Router();
-require("dotenv").config();
-const bodyParser = require("body-parser");
-router.use(bodyParser.urlencoded({ extended: true }));
+//const router = express();
 
-//const MongoClient = MongoDb.MongoClient
+require("dotenv").config();
+const MongoDB = require("mongodb");
+const MongoClient = MongoDB.MongoClient;
+const mongouri =
+  "mongodb+srv://" +
+  process.env.USER +
+  ":" +
+  process.env.PASS +
+  "@" +
+  process.env.MONGOHOST;
+
+const client = new MongoClient(mongouri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 router.get("/acquisition/:id", async (req, res, next) => {
+  let data = {};
   try {
-    const { MongoClient } = require("mongodb");
-    const mongouri = `mongodb+srv://${process.env.USER}:${process.env.PASS}@${process.env.MONGOHOST}/myapp0_db?retryWrites=true&w=majority`;
-    const client = new MongoClient(mongouri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await client.connect();
+    const db = client.db(process.env.DB);
+    const user = { username: req.params.id };
 
-    client.connect(async (err) => {
-      const db = client.db(process.env.DB);
-      const collection = db.collection("expense");
-      const user = { username: req.params.id };
-      const data = await collection.estimatedDocumentCount();
-      console.log(data);
-      client.close();
-      res.json({ ok: true });
-      //   console.log(data);
-    });
+    var collection = db.collection("expense");
+    const expense = await collection.find(user).toArray();
+    data.expense = expense;
+
+    collection = db.collection("income");
+    const income = await collection.find(user).toArray();
+    data.income = income;
+
+    client.close();
+    res.json(data);
   } catch (err) {
-    console.log(err?.message);
+    //console.log(err?.message);
+    console.log(err);
+    res.json({ err: true });
   }
-  //res.send("respond process");
 });
 
 module.exports = router;
