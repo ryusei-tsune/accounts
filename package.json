@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "cross-env DEBUG=ccf:* nodemon ./bin/www"
+    "dev": "cross-env DEBUG=accounts:* nodemon ./bin/www"
   },
   "dependencies": {
     "@vue/cli": "^4.5.15",
