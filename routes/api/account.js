@@ -50,5 +50,28 @@ router.post("/user", async (req, res) => {
     res.json({ err: true });
   }
 });
+router.post("/users", async (req, res) => {
+  try {
+    const username = req.body.username;
+    const password = req.body.password;
+    await client.connect();
+    const db = client.db(process.env.DB);
 
+    const collection = db.collection("users");
+    const user = {
+      name: { $eq: username },
+      password: { $eq: hashed(password) },
+    };
+    const existing = await collection.findOne(user);
+    if (existing) {
+      res.cookie("user", user); // ヒットしたらクッキーに保存
+      res.json({ existing: true });
+    } else {
+      res.json({ existing: false });
+    }
+  } catch (err) {
+    console.log(err?.message);
+    res.json({ err: true });
+  }
+});
 module.exports = router;
