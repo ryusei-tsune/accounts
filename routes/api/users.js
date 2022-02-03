@@ -50,9 +50,9 @@ router.post("/user", async (req, res) => {
     res.json({ err: true });
   }
 });
-router.post("/users", async (req, res) => {
+router.post("/:username", async (req, res) => {
   try {
-    const username = req.body.username;
+    const username = req.params.username;
     const password = req.body.password;
     await client.connect();
     const db = client.db(process.env.DB);
