@@ -1,15 +1,26 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <AppBar />
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
       <router-link to="/test" style="padding-left: 16px">Test</router-link>
-    </div>
+    </div> -->
     <router-view />
   </div>
 </template>
+<script>
+import AppBar from "@/components/app-bar.vue";
+export default {
+  components: {
+    AppBar,
+  },
+};
+</script>
 
 <style>
+@import "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900";
+@import "https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css";
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
