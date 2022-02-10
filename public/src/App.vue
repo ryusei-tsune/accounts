@@ -1,11 +1,6 @@
 <template>
   <div id="app">
-    <AppBar />
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-      <router-link to="/test" style="padding-left: 16px">Test</router-link>
-    </div> -->
+    <AppBar></AppBar>
     <router-view />
   </div>
 </template>
