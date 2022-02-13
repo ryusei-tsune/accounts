@@ -1,7 +1,11 @@
 <template>
   <div id="app">
-    <AppBar></AppBar>
-    <router-view />
+    <v-app>
+      <AppBar></AppBar>
+      <v-main>
+        <router-view />
+      </v-main>
+    </v-app>
   </div>
 </template>
 <script>

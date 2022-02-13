@@ -1,8 +1,7 @@
 <template>
-  <v-app-bar style="background: cyan">
+  <v-app-bar color="cyan" dark max-height="60px">
     <v-toolbar-title>家計簿アプリ</v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn small class="ml-2">in</v-btn>
     <div v-if="userAuth">
       <!-- {{ username }} -->
       <v-btn small to="/" class="ml-2" @click="logout()">
