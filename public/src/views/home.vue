@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <v-row justify="center" color="blue" class="ma-0">
+  <div>
+    <v-row justify="center" class="ma-0">
       <v-col cols="11" md="5" lg="4">
         <v-card class="mt-10 mx-auto outlined" color="cyan lighten-5">
           <div class="pb-4">
@@ -28,14 +28,14 @@
           <v-row>
             <v-col cols="12" sm="12" md="7">
               <v-card-text>
-                アカウントをお持ちでない方は<router-link to="/create"
+                アカウントをお持ちでない方は<router-link to="/sign-up"
                   >こちらへ</router-link
                 >
                 <router-view />
               </v-card-text>
             </v-col>
             <v-col cols="12" sm="12" md="5">
-              <v-card-text class="text-right">
+              <v-card-text>
                 <v-btn color="cyan lighten-2" @click="login()">
                   <v-icon left small>mdi-login</v-icon>
                   ログイン
@@ -59,7 +59,6 @@ export default {
     return {
       username: "",
       password: "",
-      judge: 0,
       required: (value) => !!value || "必ず入力してください",
     };
   },
@@ -78,12 +77,13 @@ export default {
           console.log(data);
 
           if (data.existing) {
+            this.$router.push("/resister");
             console.log("成功");
           } else {
             let wrong = document.getElementById("wrong");
             if (!wrong.hasChildNodes()) {
               const addtext = document.createElement("h5");
-              addtext.innerText = "ユーザ名またはパスワードが違います！";
+              addtext.innerText = "ユーザ名またはパスワードが違います";
               wrong.appendChild(addtext);
               wrong.setAttribute("style", "color:red;");
             }
