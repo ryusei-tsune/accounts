@@ -26,14 +26,17 @@
             ></v-text-field>
           </v-form>
           <v-row>
-            <v-col cols="7">
+            <v-col cols="12" sm="12" md="7">
               <v-card-text>
-                アカウントをお持ちでない方は<a href="./create">こちら</a>
+                アカウントをお持ちでない方は<router-link to="/create"
+                  >こちらへ</router-link
+                >
+                <router-view />
               </v-card-text>
             </v-col>
-            <v-col cols="5">
+            <v-col cols="12" sm="12" md="5">
               <v-card-text class="text-right">
-                <v-btn color="cyan lighten-2" @click="signIn()">
+                <v-btn color="cyan lighten-2" @click="login()">
                   <v-icon left small>mdi-login</v-icon>
                   ログイン
                 </v-btn>
@@ -64,7 +67,7 @@ export default {
     this.$refs.form.resetValidation();
   },
   methods: {
-    async signIn() {
+    async login() {
       if (this.$refs.form.validate()) {
         try {
           const pass = { password: this.password };
