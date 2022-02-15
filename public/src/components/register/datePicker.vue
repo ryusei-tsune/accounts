@@ -23,6 +23,7 @@
 </template>
 <script>
 export default {
+  name: "datePicker-component",
   components: {},
   middleware: [],
   props: {

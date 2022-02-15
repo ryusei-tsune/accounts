@@ -43,7 +43,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "display-items",
+  name: "displayItems-component",
   components: {},
   props: {
     itemList: {

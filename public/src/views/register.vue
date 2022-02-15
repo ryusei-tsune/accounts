@@ -2,7 +2,7 @@
   <div>
     <Tabs>
       <v-row justify="center" class="mt-2">
-        <resisterItem type="expense">
+        <registerItem type="expense">
           <template v-slot:type>
             <v-card-text>支出</v-card-text>
           </template>
@@ -15,8 +15,8 @@
             <v-spacer></v-spacer>
             300
           </template>
-        </resisterItem>
-        <resisterItem type="income">
+        </registerItem>
+        <registerItem type="income">
           <template v-slot:type>
             <v-card-text>収入</v-card-text>
           </template>
@@ -29,19 +29,19 @@
             <v-spacer></v-spacer>
             {{ num.toLocaleString() }}
           </template>
-        </resisterItem>
+        </registerItem>
       </v-row>
     </Tabs>
   </div>
 </template>
 <script>
 import Tabs from "../components/tabs.vue";
-import resisterItem from "../components/resister/resisterItem.vue";
+import registerItem from "../components/register/registerItem.vue";
 export default {
-  name: "Resiter",
+  name: "Register",
   components: {
     Tabs,
-    resisterItem,
+    registerItem,
   },
   data() {
     return {

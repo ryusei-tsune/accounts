@@ -52,7 +52,7 @@
 // @ is an alias to /src
 import axios from "axios";
 export default {
-  name: "Home",
+  name: "Sign-up",
   components: {},
   data() {
     return {

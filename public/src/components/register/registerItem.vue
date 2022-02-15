@@ -61,7 +61,7 @@
       </v-card-text>
     </v-card>
     <v-col cols="12" class="text-center mt-2">
-      <v-btn color="cyan" class="mb-2" @click="resisterItem()">
+      <v-btn color="cyan" class="mb-2" @click="registerItem()">
         <v-icon left>mdi-plus-thick</v-icon>
         登録
       </v-btn>
@@ -72,7 +72,7 @@
 import axios from "axios";
 import datePicker from "./datePicker.vue";
 export default {
-  name: "resisterItem",
+  name: "registerItem-component",
   components: {
     datePicker,
   },
@@ -96,22 +96,22 @@ export default {
     deleteItem(index) {
       this.itemList.splice(index, 1);
     },
-    async resisterItem() {
+    async registerItem() {
       try {
-        const resisterData = this.itemList.map((item) => ({
+        const registerData = this.itemList.map((item) => ({
           ...item,
           username: this.$store.state.userId,
         }));
-        console.log(resisterData);
-        console.log(JSON.stringify(resisterData));
+        console.log(registerData);
+        console.log(JSON.stringify(registerData));
         const { data } = await axios.post(
-          `/api/resistering/${this.type}`,
-          JSON.stringify(resisterData)
+          `/api/registering/${this.type}`,
+          JSON.stringify(registerData)
         );
         console.log(data);
         this.itemList = [{ Date: "", Item: "", Price: "" }];
       } catch (err) {
-        console.log("test");
+        console.log(err?.message);
       }
     },
     SetDate(date, index) {

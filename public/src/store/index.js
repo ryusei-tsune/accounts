@@ -17,7 +17,7 @@ export default new Vuex.Store({
         state.userId = "";
       }
     },
-    userResister(state, name, id) {
+    userRegister(state, name, id) {
       console.log(name, id);
       state.username = name;
       state.userId = id;
