@@ -64,7 +64,7 @@ router.post("/:username", async (req, res) => {
     };
     const existing = await collection.findOne(user);
     if (existing) {
-      res.cookie("user", user); // ヒットしたらクッキーに保存
+      res.cookie("user", existing); // ヒットしたらクッキーに保存
       res.json({ existing: true });
     } else {
       res.json({ existing: false });
