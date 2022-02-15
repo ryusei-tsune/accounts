@@ -56,7 +56,7 @@ export default {
         user = JSON.parse(decodeURIComponent(info[1]).substr(2));
       }
     }
-    console.log(user.id, user._id);
+    console.log(user);
     this.$store.commit("userResister", user.name, user._id);
     this.initialize();
   },
