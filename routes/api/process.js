@@ -81,8 +81,7 @@ router.delete("/item/:type", async (req, res, next) => {
     res.status(200); // HTTP ステータスコード返却
     client.close(); // DB を閉じる
   } catch (err) {
-    //console.log(err?.message);
-    console.log(err);
+    console.log(err?.message);
     res.json({ err: true });
   }
 });

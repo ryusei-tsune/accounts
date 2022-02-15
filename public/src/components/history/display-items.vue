@@ -1,35 +1,33 @@
 <template>
-  <v-card>
+  <v-card outlined>
     <v-row dense>
-      <v-col cols="8">
+      <v-col cols="4">
         <slot name="type"></slot>
       </v-col>
     </v-row>
     <v-row dense>
       <v-col cols="12">
-        <v-card outlined>
-          <div v-if="itemList.length == 0">
-            <v-card-text> データがありません </v-card-text>
-          </div>
-          <div v-for="(item, index) in itemList" :key="item">
-            <v-row>
-              <v-col cols="4">
-                {{ item.Date }}
-              </v-col>
-              <v-col cols="3">
-                {{ item.Item }}
-              </v-col>
-              <v-col cols="3">
-                {{ item.Price.toLocaleString() }}
-              </v-col>
-              <v-col cols="1" align="center">
-                <v-btn x-small class="my-1" @click="deleteItem(index)">
-                  <v-icon small>mdi-delete</v-icon>
-                </v-btn>
-              </v-col>
-            </v-row>
-          </div>
-        </v-card>
+        <div v-if="itemList.length == 0">
+          <v-card-text> データがありません </v-card-text>
+        </div>
+        <div v-for="(item, index) in itemList" :key="item">
+          <v-row>
+            <v-col cols="4">
+              {{ item.Date }}
+            </v-col>
+            <v-col cols="3">
+              {{ item.Item }}
+            </v-col>
+            <v-col cols="3">
+              {{ item.Price.toLocaleString() }}
+            </v-col>
+            <v-col cols="1" align="center">
+              <v-btn x-small class="my-1" @click="deleteItem(index)">
+                <v-icon small>mdi-delete</v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
+        </div>
       </v-col>
     </v-row>
     <v-row dense>
@@ -43,7 +41,7 @@
 </template>
 
 <script>
-// @ is an alias to /src
+import axios from "axios";
 export default {
   name: "display-items",
   components: {},
@@ -58,12 +56,28 @@ export default {
       required: false,
       default: 0,
     },
+    type: {
+      type: String,
+      required: true,
+    },
   },
   data() {
     return {};
   },
   computed: {},
   mounted() {},
-  methods: {},
+  methods: {
+    async deleteItem(index) {
+      try {
+        console.log(this.itemList[index]._id);
+        const id = { id: this.itemList[index]._id };
+        console.log(id);
+        const { data } = axios.delete(`/api/item/${this.type}`, id);
+        console.log(data);
+      } catch (err) {
+        console.log(err?.message);
+      }
+    },
+  },
 };
 </script>

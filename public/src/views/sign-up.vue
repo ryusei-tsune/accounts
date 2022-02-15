@@ -31,7 +31,6 @@
                 アカウントをお持ちの方は<router-link to="/"
                   >こちらへ</router-link
                 >
-                <router-view />
               </v-card-text>
             </v-col>
             <v-col cols="12" sm="12" md="5" class="px-0">
@@ -71,7 +70,6 @@ export default {
         try {
           const userData = { username: this.username, password: this.password };
           const { data } = await axios.post(`/api/users/user`, userData);
-          console.log(data);
 
           if (data.existing) {
             let wrong = document.getElementById("wrong");
@@ -83,10 +81,9 @@ export default {
             }
           } else {
             this.$router.push("/");
-            console.log("成功");
           }
         } catch (err) {
-          console.log("test");
+          console.log(err?.message);
         }
       }
     },

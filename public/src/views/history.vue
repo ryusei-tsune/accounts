@@ -1,14 +1,25 @@
 <template>
   <div>
     <Tabs>
-      <h1>history</h1>
-      <v-row>
+      <v-row justify="center" class="mt-2">
         <v-col cols="12" md="5" xl="4" class="mx-1">
-          <displayItems :itemList="expenseList" :sum="expenseSum">
+          <displayItems
+            :itemList="expenseList"
+            :sum="expenseSum"
+            type="expense"
+          >
             <template v-slot:type>
               <v-card-text>支出</v-card-text>
             </template>
             <template v-slot:sum> 支出合計 </template>
+          </displayItems>
+        </v-col>
+        <v-col cols="12" md="5" xl="4" class="mx-1">
+          <displayItems :itemList="incomeList" :sum="incomeSum" type="income">
+            <template v-slot:type>
+              <v-card-text>収入</v-card-text>
+            </template>
+            <template v-slot:sum> 収入合計 </template>
           </displayItems>
         </v-col>
       </v-row>
@@ -32,18 +43,6 @@ export default {
       expenseList: [],
       incomeSum: 0,
       expenseSum: 0,
-      username: "",
-      userId: "",
-      type: [],
-      expensetype: [],
-      incometype: [],
-      date: [],
-      exdateList: [],
-      indateList: [],
-      ExsearchType: "",
-      ExsearchDate: "",
-      InsearchType: "",
-      InsearchDate: "",
     };
   },
   mounted() {
@@ -57,7 +56,9 @@ export default {
       }
     }
     console.log(user);
+    console.log(user.name, user._id);
     this.$store.commit("userResister", user.name, user._id);
+    console.log(this.$store.state.userId, this.$store.state.username);
     this.initialize();
   },
   methods: {
@@ -75,7 +76,7 @@ export default {
         console.log(this.incomeList);
         console.log(this.expenseList);
       } catch (err) {
-        console.log(err);
+        console.log(err?.message);
       }
     },
   },

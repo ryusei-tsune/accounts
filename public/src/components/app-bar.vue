@@ -3,7 +3,7 @@
     <v-toolbar-title>家計簿アプリ</v-toolbar-title>
     <v-spacer></v-spacer>
     <div v-if="userAuth">
-      <!-- {{ username }} -->
+      {{ username }}
       <v-btn small to="/" class="ml-2" @click="logout()">
         <v-icon>mdi-logout</v-icon>
       </v-btn>

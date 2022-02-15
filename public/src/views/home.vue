@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row justify="center" class="ma-0">
-      <v-col cols="11" md="5" lg="4">
+      <v-col cols="11" md="6" lg="4">
         <v-card class="mt-10 mx-auto outlined" color="cyan lighten-5">
           <div class="pb-4">
             <h1>ログイン</h1>
@@ -31,7 +31,6 @@
                 アカウントをお持ちでない方は<router-link to="/sign-up"
                   >こちらへ</router-link
                 >
-                <router-view />
               </v-card-text>
             </v-col>
             <v-col cols="12" sm="12" md="5">
@@ -74,11 +73,10 @@ export default {
             `/api/users/${this.username}`,
             pass
           );
-          console.log(data);
 
           if (data.existing) {
-            this.$router.push("/resister");
-            console.log("成功");
+            this.$store.commit("userAuthentication", true);
+            this.$router.push("/history");
           } else {
             let wrong = document.getElementById("wrong");
             if (!wrong.hasChildNodes()) {
@@ -89,7 +87,7 @@ export default {
             }
           }
         } catch (err) {
-          console.log("test");
+          console.log(err?.message);
         }
       }
     },
