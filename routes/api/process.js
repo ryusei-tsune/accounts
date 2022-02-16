@@ -74,7 +74,7 @@ router.delete("/item/:type", async (req, res, next) => {
       collection = db.collection("income");
     }
 
-    const id = JSON.parse(req.body); // 保存対象
+    const id = JSON.parse(req.body.data); // 保存対象
     console.log(id);
     await collection.deleteOne({ _id: new MongoDB.ObjectId(id.id) });
 

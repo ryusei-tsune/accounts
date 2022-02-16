@@ -72,7 +72,7 @@ export default {
         console.log(this.itemList[index]._id);
         const id = { id: this.itemList[index]._id };
         console.log(id);
-        const { data } = axios.delete(`/api/item/${this.type}`, id);
+        const { data } = axios.delete(`/api/item/${this.type}`, { data: id });
         console.log(data);
       } catch (err) {
         console.log(err?.message);
