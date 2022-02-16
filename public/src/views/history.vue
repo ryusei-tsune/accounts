@@ -57,7 +57,7 @@ export default {
     }
     console.log(user);
     console.log(user.name, String(user._id));
-    this.$store.commit("userRegister", user.name, String(user._id));
+    this.$store.commit("userRegister", { name: user.name, id: user._id });
     console.log(this.$store.state.userId, this.$store.state.username);
     this.initialize();
   },

@@ -17,10 +17,10 @@ export default new Vuex.Store({
         state.userId = "";
       }
     },
-    userRegister(state, name, id) {
-      console.log(name, id);
-      state.username = name;
-      state.userId = id;
+    userRegister(state, payload) {
+      console.log(payload.name, payload.id);
+      state.username = payload.name;
+      state.userId = payload.id;
     },
   },
   actions: {},
