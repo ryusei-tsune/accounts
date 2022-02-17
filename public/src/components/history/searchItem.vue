@@ -3,14 +3,14 @@
     <v-col cols="3">
       <v-select
         v-model="searchDate"
-        :items="variety[Date]"
+        :items="variety.Date"
         placeholder="期間"
       ></v-select>
     </v-col>
     <v-col cols="3">
       <v-select
         v-model="searchType"
-        :items="variety[Item]"
+        :items="variety.Item"
         placeholder="項目"
       ></v-select>
     </v-col>
@@ -45,6 +45,11 @@ export default {
   mounted() {},
   methods: {
     async Search() {
+      console.log(this.variety);
+      console.log(this.variety[Date]);
+      console.log(this.variety[Item]);
+      console.log(this.variety.Date);
+      console.log(this.variety.Item);
       this.$emit("search", this.searchDate, this.searchType, this.type);
     },
   },
