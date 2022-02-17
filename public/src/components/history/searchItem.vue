@@ -46,8 +46,8 @@ export default {
   methods: {
     async Search() {
       console.log(this.variety);
-      console.log(this.variety[Date]);
-      console.log(this.variety[Item]);
+      // console.log(this.variety[Date]);
+      // console.log(this.variety[Item]);
       console.log(this.variety.Date);
       console.log(this.variety.Item);
       this.$emit("search", this.searchDate, this.searchType, this.type);
