@@ -2,7 +2,7 @@
   <div>
     <Tabs>
       <v-row justify="center" class="mt-2">
-        <registerItem type="expense">
+        <RegisterItem type="expense" @register="registerData">
           <template v-slot:type>
             <v-card-text>支出</v-card-text>
           </template>
@@ -15,8 +15,8 @@
             <v-spacer></v-spacer>
             300
           </template>
-        </registerItem>
-        <registerItem type="income">
+        </RegisterItem>
+        <RegisterItem type="income" @resister="registerData">
           <template v-slot:type>
             <v-card-text>収入</v-card-text>
           </template>
@@ -29,19 +29,20 @@
             <v-spacer></v-spacer>
             {{ num.toLocaleString() }}
           </template>
-        </registerItem>
+        </RegisterItem>
       </v-row>
     </Tabs>
   </div>
 </template>
 <script>
+import axios from "axios";
 import Tabs from "../components/tabs.vue";
-import registerItem from "../components/register/registerItem.vue";
+import RegisterItem from "../components/register/registerItem.vue";
 export default {
   name: "Register",
   components: {
     Tabs,
-    registerItem,
+    RegisterItem,
   },
   data() {
     return {
@@ -49,6 +50,17 @@ export default {
     };
   },
   mounted() {},
-  methods: {},
+  methods: {
+    async registerData(registerData, type) {
+      try {
+        const { data } = await axios.post(`/api/registering/${type}`, {
+          data: registerData,
+        });
+        console.log(data);
+      } catch (err) {
+        console.log(err?.message);
+      }
+    },
+  },
 };
 </script>

@@ -15,7 +15,6 @@
         label="日付"
         v-bind="attrs"
         v-on="on"
-        style="font-size: 12px"
       ></v-text-field>
     </template>
     <v-date-picker v-model="date" @input="datePick(date)"></v-date-picker>

@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   name: "displayItems-component",
   components: {},
@@ -67,13 +66,12 @@ export default {
   computed: {},
   mounted() {},
   methods: {
-    async deleteItem(index) {
+    deleteItem(index) {
       try {
         console.log(this.itemList[index]._id);
         const id = { id: this.itemList[index]._id };
         console.log(id);
-        const { data } = axios.delete(`/api/item/${this.type}`, { data: id });
-        console.log(data);
+        this.$emit("delete", id, this.type);
       } catch (err) {
         console.log(err?.message);
       }

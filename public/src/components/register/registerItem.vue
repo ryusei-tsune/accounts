@@ -22,11 +22,11 @@
       <v-card-text v-for="(item, index) in itemList" :key="index" class="px-0">
         <v-row align="center" class="ma-0">
           <v-col cols="4">
-            <datePicker
+            <DatePicker
               :index="index"
               :displayDate="item.Date"
               @setDate="SetDate"
-            ></datePicker>
+            ></DatePicker>
           </v-col>
           <v-col cols="4">
             <v-text-field
@@ -69,12 +69,11 @@
   </v-col>
 </template>
 <script>
-import axios from "axios";
-import datePicker from "./datePicker.vue";
+import DatePicker from "./datePicker.vue";
 export default {
   name: "registerItem-component",
   components: {
-    datePicker,
+    DatePicker,
   },
   props: {
     type: {
@@ -96,19 +95,13 @@ export default {
     deleteItem(index) {
       this.itemList.splice(index, 1);
     },
-    async registerItem() {
+    registerItem() {
       try {
         const registerData = this.itemList.map((item) => ({
           ...item,
           username: this.$store.state.userId,
         }));
-        console.log(registerData);
-        console.log(JSON.stringify(registerData));
-        const { data } = await axios.post(
-          `/api/registering/${this.type}`,
-          JSON.stringify(registerData)
-        );
-        console.log(data);
+        this.$emit("register", registerData, this.type);
         this.itemList = [{ Date: "", Item: "", Price: "" }];
       } catch (err) {
         console.log(err?.message);
