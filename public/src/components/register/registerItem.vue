@@ -28,7 +28,7 @@
               @setDate="SetDate"
             ></DatePicker>
           </v-col>
-          <v-col cols="4">
+          <v-col cols="3" class="pl-0">
             <v-text-field
               v-model="item.Item"
               prepend-icon="mdi-clipboard-text-outline"
@@ -40,7 +40,7 @@
             >
             </v-text-field>
           </v-col>
-          <v-col cols="4">
+          <v-col cols="3" class="pl-0">
             <v-text-field
               v-model="item.Price"
               prepend-icon="mdi-cash"
