@@ -18,12 +18,12 @@ router.get("/acquisition/:id", async (req, res, next) => {
     const db = client.db(process.env.DB);
     const user = { username: req.params.id };
 
-    var collection = db.collection("expense");
-    const expense = await collection.find(user).toArray();
+    let collection = db.collection("expense");
+    const expense = await collection.find(user).sort({ Date: -1 }).toArray();
     data.expense = expense;
 
     collection = db.collection("income");
-    const income = await collection.find(user).toArray();
+    const income = await collection.find(user).sort({ Date: -1 }).toArray();
     data.income = income;
 
     client.close();
@@ -35,28 +35,42 @@ router.get("/acquisition/:id", async (req, res, next) => {
   }
 });
 
+router.get("/searching/:id/:type", async (req, res, next) => {
+  try {
+    await client.connect();
+    const db = client.db(process.env.DB);
+    const date = req.query.date;
+    const kind = req.query.kind;
+    const condition = { username: req.params.id };
+    if (date) {
+      condition.Date = { $regex: date };
+    }
+    if (kind) {
+      condition.Item = { $eq: kind };
+    }
+
+    const collection = db.collection(req.params.type);
+    const data = await collection.find(condition).sort({ Date: -1 }).toArray();
+
+    client.close();
+    res.json(data);
+  } catch (err) {
+    console.log(err?.message);
+  }
+});
+
 router.post("/registering/:type", async (req, res, next) => {
   try {
     await client.connect();
     const db = client.db(process.env.DB);
 
-    var collection;
-    const type = req.params.type;
-    if (type == "expense") {
-      collection = db.collection("expense");
-    } else {
-      collection = db.collection("income");
-    }
-
-    const data = JSON.parse(req.body); // 保存対象
-    console.log(data);
-    await collection.insertMany(data);
+    const collection = db.collection(req.params.type);
+    await collection.insertMany(req.body.data);
 
     res.status(200); // HTTP ステータスコード返却
     client.close(); // DB を閉じる
   } catch (err) {
-    //console.log(err?.message);
-    console.log(err);
+    console.log(err?.message);
     res.json({ err: true });
   }
 });
@@ -66,14 +80,7 @@ router.delete("/item/:type", async (req, res, next) => {
     await client.connect();
     const db = client.db(process.env.DB);
 
-    var collection;
-    const type = req.params.type;
-    if (type == "expense") {
-      collection = db.collection("expense");
-    } else {
-      collection = db.collection("income");
-    }
-
+    const collection = db.collection(req.params.type);
     const id = JSON.parse(req.body.data); // 保存対象
     console.log(id);
     await collection.deleteOne({ _id: new MongoDB.ObjectId(id.id) });
