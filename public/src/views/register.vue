@@ -16,7 +16,7 @@
             300
           </template>
         </RegisterItem>
-        <RegisterItem type="income" @resister="registerData">
+        <RegisterItem type="income" @register="registerData">
           <template v-slot:type>
             <v-card-text>収入</v-card-text>
           </template>

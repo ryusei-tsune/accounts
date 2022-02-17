@@ -131,6 +131,9 @@ export default {
             .map((row) => row[k])
             .filter((item) => !!item);
         });
+
+        console.log(this.expenseType);
+        console.log(this.incomeType);
       } catch (err) {
         console.log(err?.message);
       }
