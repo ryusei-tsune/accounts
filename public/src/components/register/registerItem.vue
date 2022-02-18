@@ -89,9 +89,7 @@ export default {
       itemList: [{ Date: "", Item: "", Price: "" }],
     };
   },
-  mounted() {
-    this.$refs.form.resetValidation();
-  },
+  mounted() {},
   methods: {
     addItem() {
       this.itemList.push({ Date: "", Item: "", Price: "" });

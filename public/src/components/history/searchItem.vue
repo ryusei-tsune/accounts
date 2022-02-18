@@ -43,9 +43,11 @@ export default {
   },
   computed: {
     search() {
+      const date = Array.from(new Set(this.variety.Date));
+      const item = Array.from(new Set(this.variety.Item));
       const result = {
-        date: Set(this.variety.Date),
-        item: Set(this.variety.Item),
+        date: date,
+        item: item,
       };
       return result;
     },
