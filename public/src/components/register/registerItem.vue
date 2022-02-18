@@ -15,10 +15,7 @@
       <v-divider></v-divider>
       <v-card-text>
         <v-row justify="center" class="mx-4">
-          <v-col cols="11">
-            <slot name="example"></slot>
-          </v-col>
-          <v-col cols="1"></v-col>
+          <slot name="example"></slot>
         </v-row>
       </v-card-text>
       <v-divider></v-divider>

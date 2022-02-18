@@ -7,14 +7,11 @@
             <v-card-text>支出</v-card-text>
           </template>
           <template v-slot:example>
-            例：
-            <div>
-              2022/01/01
-              <v-spacer></v-spacer>
-              食費
-              <v-spacer></v-spacer>
-              300
-            </div>
+            例： 2022/01/01
+            <v-spacer></v-spacer>
+            食費
+            <v-spacer></v-spacer>
+            300
           </template>
         </RegisterItem>
         <RegisterItem type="income" @register="registerData">
@@ -22,14 +19,11 @@
             <v-card-text>収入</v-card-text>
           </template>
           <template v-slot:example>
-            例：
-            <div>
-              2022/01/25
-              <v-spacer></v-spacer>
-              給料
-              <v-spacer></v-spacer>
-              {{ num.toLocaleString() }}
-            </div>
+            例：2022/01/25
+            <v-spacer></v-spacer>
+            給料
+            <v-spacer></v-spacer>
+            {{ num.toLocaleString() }}
           </template>
         </RegisterItem>
       </v-row>

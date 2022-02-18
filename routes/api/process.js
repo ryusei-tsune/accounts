@@ -81,9 +81,8 @@ router.delete("/item/:type", async (req, res, next) => {
     const db = client.db(process.env.DB);
 
     const collection = db.collection(req.params.type);
-    const id = JSON.parse(req.body.id); // 保存対象
-    console.log(id);
-    await collection.deleteOne({ _id: new MongoDB.ObjectId(id.id) });
+    const id = req.body.id; // 保存対象
+    await collection.deleteOne({ _id: new MongoDB.ObjectId(id) });
 
     res.status(200); // HTTP ステータスコード返却
     client.close(); // DB を閉じる
