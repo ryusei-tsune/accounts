@@ -1,9 +1,7 @@
 <template>
   <v-card outlined>
-    <v-row dense>
-      <v-col cols="4">
-        <slot name="type"></slot>
-      </v-col>
+    <v-row dense justify="center">
+      <slot name="type"></slot>
     </v-row>
     <v-row dense>
       <v-col cols="12">
@@ -68,9 +66,7 @@ export default {
   methods: {
     deleteItem(index) {
       try {
-        console.log(this.itemList[index]._id);
         const id = { id: this.itemList[index]._id };
-        console.log(id);
         this.$emit("delete", id, this.type);
       } catch (err) {
         console.log(err?.message);

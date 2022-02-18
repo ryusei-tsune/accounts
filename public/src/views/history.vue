@@ -15,7 +15,7 @@
             @delete="deleteItem"
           >
             <template v-slot:type>
-              <v-card-text>支出</v-card-text>
+              <v-card-text class="header-type">支出</v-card-text>
             </template>
             <template v-slot:sum> 支出合計 </template>
           </DisplayItems>
@@ -33,7 +33,7 @@
             @delete="deleteItem"
           >
             <template v-slot:type>
-              <v-card-text>収入</v-card-text>
+              <v-card-text class="header-type">収入</v-card-text>
             </template>
             <template v-slot:sum> 収入合計 </template>
           </DisplayItems>
@@ -104,11 +104,11 @@ export default {
         this.expenseList = [...data.expense];
 
         this.incomeSum = this.incomeList.reduce(
-          (previous, current) => previous + current.Price,
+          (previous, current) => previous + Number(current.Price),
           0
         );
         this.expenseSum = this.expenseList.reduce(
-          (previous, current) => previous + current.Price,
+          (previous, current) => previous + Number(current.Price),
           0
         );
 
@@ -134,9 +134,6 @@ export default {
             .map((row) => row[k])
             .filter((item) => !!item);
         });
-
-        console.log(this.expenseType);
-        console.log(this.incomeType);
       } catch (err) {
         console.log(err?.message);
       }
@@ -164,3 +161,9 @@ export default {
   },
 };
 </script>
+<style>
+.header-type {
+  font-weight: bold;
+  font-size: 16px;
+}
+</style>
