@@ -5,6 +5,7 @@
         v-model="searchDate"
         :items="search.Date"
         placeholder="期間"
+        solo
       ></v-select>
     </v-col>
     <v-col cols="3">
@@ -12,6 +13,7 @@
         v-model="searchType"
         :items="search.Item"
         placeholder="項目"
+        solo
       ></v-select>
     </v-col>
     <v-col cols="3">
