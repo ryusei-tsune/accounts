@@ -141,6 +141,7 @@ export default {
     async deleteItem(id, type) {
       try {
         await axios.delete(`/api/item/${type}`, { data: id });
+        this.initialize();
       } catch (err) {
         console.log(err?.message);
       }

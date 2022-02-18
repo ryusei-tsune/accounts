@@ -21,37 +21,39 @@
       <v-divider></v-divider>
       <v-card-text v-for="(item, index) in itemList" :key="index" class="px-0">
         <v-row align="center" class="ma-0">
-          <v-col cols="4">
-            <DatePicker
-              :index="index"
-              :displayDate="item.Date"
-              @setDate="SetDate"
-            ></DatePicker>
-          </v-col>
-          <v-col cols="3" class="pl-0">
-            <v-text-field
-              v-model="item.Item"
-              prepend-icon="mdi-clipboard-text-outline"
-              dense
-              hide-details="auto"
-              label="項目"
-              :rules="[required]"
-              class="pb-1"
-            >
-            </v-text-field>
-          </v-col>
-          <v-col cols="3" class="pl-0">
-            <v-text-field
-              v-model="item.Price"
-              prepend-icon="mdi-cash"
-              dense
-              hide-details="auto"
-              label="金額"
-              :rules="[required]"
-              class="pb-1"
-            >
-            </v-text-field>
-          </v-col>
+          <v-form ref="form">
+            <v-col cols="4">
+              <DatePicker
+                :index="index"
+                :displayDate="item.Date"
+                @setDate="SetDate"
+              ></DatePicker>
+            </v-col>
+            <v-col cols="3" class="pl-0">
+              <v-text-field
+                v-model="item.Item"
+                prepend-icon="mdi-clipboard-text-outline"
+                dense
+                hide-details="auto"
+                label="項目"
+                :rules="[required]"
+                class="pb-1"
+              >
+              </v-text-field>
+            </v-col>
+            <v-col cols="3" class="pl-0">
+              <v-text-field
+                v-model="item.Price"
+                prepend-icon="mdi-cash"
+                dense
+                hide-details="auto"
+                label="金額"
+                :rules="[required]"
+                class="pb-1"
+              >
+              </v-text-field>
+            </v-col>
+          </v-form>
           <v-col cols="1" v-if="index > 0">
             <v-btn x-small class="mt-1 mx-auto" @click="deleteItem(index)">
               <v-icon small>mdi-delete</v-icon>
@@ -87,7 +89,9 @@ export default {
       itemList: [{ Date: "", Item: "", Price: "" }],
     };
   },
-  mounted() {},
+  mounted() {
+    this.$refs.form.resetValidation();
+  },
   methods: {
     addItem() {
       this.itemList.push({ Date: "", Item: "", Price: "" });
@@ -106,6 +110,7 @@ export default {
       } catch (err) {
         console.log(err?.message);
       }
+      this.$refs.form.resetValidation();
     },
     SetDate(date, index) {
       this.itemList[index].Date = date;

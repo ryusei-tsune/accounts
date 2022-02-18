@@ -3,17 +3,15 @@
     <v-col cols="3">
       <v-select
         v-model="searchDate"
-        :items="search.Date"
+        :items="search.date"
         placeholder="期間"
-        solo
       ></v-select>
     </v-col>
     <v-col cols="3">
       <v-select
         v-model="searchType"
-        :items="search.Item"
+        :items="search.item"
         placeholder="項目"
-        solo
       ></v-select>
     </v-col>
     <v-col cols="3">
@@ -45,7 +43,11 @@ export default {
   },
   computed: {
     search() {
-      return this.variety;
+      const result = {
+        date: Set(this.variety.Date),
+        item: Set(this.variety.Item),
+      };
+      return result;
     },
   },
   mounted() {},
@@ -53,8 +55,8 @@ export default {
     async Search() {
       console.log(this.variety);
       console.log(this.search);
-      console.log(this.search.Date);
-      console.log(this.search.Item);
+      console.log(this.search.date);
+      console.log(this.search.item);
       this.$emit("search", this.searchDate, this.searchType, this.type);
     },
   },
