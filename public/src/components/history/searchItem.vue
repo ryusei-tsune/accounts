@@ -1,23 +1,26 @@
 <template>
-  <v-row justify="center">
-    <v-col cols="3">
-      <v-select
-        v-model="searchDate"
-        :items="search.date"
-        placeholder="期間"
-      ></v-select>
-    </v-col>
-    <v-col cols="3">
-      <v-select
-        v-model="searchType"
-        :items="search.item"
-        placeholder="項目"
-      ></v-select>
-    </v-col>
-    <v-col cols="3">
-      <v-btn color="cyan lighten-3" @click="Search()">絞り込み</v-btn>
-    </v-col>
-  </v-row>
+  <div>
+    <v-row justify="center">
+      <v-col cols="3">
+        <v-select
+          v-model="searchDate"
+          :items="search.date"
+          placeholder="期間"
+        ></v-select>
+      </v-col>
+      <v-col cols="3">
+        <v-select
+          v-model="searchType"
+          :items="search.item"
+          placeholder="項目"
+        ></v-select>
+      </v-col>
+      <v-col cols="3">
+        <v-btn color="cyan lighten-3" @click="Search()">絞り込み</v-btn>
+      </v-col>
+    </v-row>
+    {{ search }}
+  </div>
 </template>
 
 <script>
@@ -43,11 +46,9 @@ export default {
   },
   computed: {
     search() {
-      const date = Array.from(new Set(this.variety.Date));
-      const item = Array.from(new Set(this.variety.Item));
       const result = {
-        date: date,
-        item: item,
+        date: this.variety.Date,
+        item: this.variety.Item,
       };
       return result;
     },

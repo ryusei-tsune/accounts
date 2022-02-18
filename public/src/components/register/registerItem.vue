@@ -19,9 +19,13 @@
         </v-row>
       </v-card-text>
       <v-divider></v-divider>
-      <v-card-text v-for="(item, index) in itemList" :key="index" class="px-0">
-        <v-row align="center" class="ma-0">
-          <v-form ref="form">
+      <v-form ref="form">
+        <v-card-text
+          v-for="(item, index) in itemList"
+          :key="index"
+          class="px-0"
+        >
+          <v-row align="center" class="ma-0">
             <v-col cols="4">
               <DatePicker
                 :index="index"
@@ -53,14 +57,14 @@
               >
               </v-text-field>
             </v-col>
-          </v-form>
-          <v-col cols="1" v-if="index > 0">
-            <v-btn x-small class="mt-1 mx-auto" @click="deleteItem(index)">
-              <v-icon small>mdi-delete</v-icon>
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-card-text>
+            <v-col cols="1" v-if="index > 0">
+              <v-btn x-small class="mt-1 mx-auto" @click="deleteItem(index)">
+                <v-icon small>mdi-delete</v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-card-text>
+      </v-form>
     </v-card>
     <v-col cols="12" class="text-center mt-2">
       <v-btn color="cyan" class="mb-2" @click="registerItem()">
