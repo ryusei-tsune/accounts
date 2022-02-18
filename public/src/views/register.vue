@@ -7,9 +7,7 @@
             <v-card-text>支出</v-card-text>
           </template>
           <template v-slot:example>
-            例：
-            <v-spacer></v-spacer>
-            2022/01/01
+            例：2022/01/01
             <v-spacer></v-spacer>
             食費
             <v-spacer></v-spacer>
@@ -21,9 +19,7 @@
             <v-card-text>収入</v-card-text>
           </template>
           <template v-slot:example>
-            例：
-            <v-spacer></v-spacer>
-            2022/01/25
+            例：2022/01/25
             <v-spacer></v-spacer>
             給料
             <v-spacer></v-spacer>

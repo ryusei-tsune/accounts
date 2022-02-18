@@ -82,15 +82,11 @@ export default {
     const cookies = document.cookie.split(";");
     for (let cookie of cookies) {
       const info = cookie.split("=");
-      console.log(info);
       if (info[0] == "user") {
         user = JSON.parse(decodeURIComponent(info[1]).substr(2));
       }
     }
-    console.log(user);
-    console.log(user.name, String(user._id));
     this.$store.commit("userRegister", { name: user.name, id: user._id });
-    console.log(this.$store.state.userId, this.$store.state.username);
     this.initialize();
   },
   methods: {
@@ -99,7 +95,6 @@ export default {
     },
     async getHistory() {
       try {
-        console.log(this.$store.state.userId);
         const { data } = await axios.get(
           `/api/acquisition/${this.$store.state.userId}`
         );
@@ -107,8 +102,15 @@ export default {
         //データの取得
         this.incomeList = [...data.income];
         this.expenseList = [...data.expense];
-        console.log(this.incomeList);
-        console.log(this.expenseList);
+
+        this.incomeSum = this.incomeList.reduce(
+          (previous, current) => previous + current.Price,
+          0
+        );
+        this.expenseSum = this.expenseList.reduce(
+          (previous, current) => previous + current.Price,
+          0
+        );
 
         //支出データの各項目(日付，項目)の種類を把握
         let _keys = this.expenseList
@@ -119,6 +121,7 @@ export default {
           this.expenseType[k] = this.expenseList
             .map((row) => row[k])
             .filter((item) => !!item);
+          //.filter((item) => this.expenseType[k].includes(item));
         });
 
         //収入データの各項目(日付，項目)の種類を把握

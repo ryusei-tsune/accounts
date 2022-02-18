@@ -28,7 +28,7 @@ export default {
     variety: {
       type: Object,
       required: false,
-      default: () => [],
+      default: () => ({ Date: "", Item: "" }),
     },
     type: {
       type: String,
