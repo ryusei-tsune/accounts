@@ -19,7 +19,7 @@
         <v-btn color="cyan lighten-3" @click="Search()">絞り込み</v-btn>
       </v-col>
     </v-row>
-    {{ search }}
+    {{ search }}{{ variety }}
   </div>
 </template>
 
@@ -46,6 +46,9 @@ export default {
   },
   computed: {
     search() {
+      console.log(this.variety.Date);
+      console.log(this.variety.Item);
+
       const result = {
         date: this.variety.Date,
         item: this.variety.Item,
