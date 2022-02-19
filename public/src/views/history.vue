@@ -7,6 +7,7 @@
             :variety="expenseType"
             type="expense"
             @search="searchItem"
+            v-if="expenseType.Item"
           ></Search>
           <DisplayItems
             :itemList="expenseList"
@@ -25,6 +26,7 @@
             :variety="incomeType"
             type="income"
             @search="searchItem"
+            v-if="incomeType.Item"
           ></Search>
           <DisplayItems
             :itemList="incomeList"
