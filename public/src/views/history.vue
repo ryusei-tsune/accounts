@@ -112,6 +112,7 @@ export default {
           (previous, current) => previous + Number(current.Price),
           0
         );
+
         //支出データの各項目(日付，項目)の種類を把握
         let _keys = this.expenseList
           .map((row) => Object.keys(row))
@@ -126,6 +127,7 @@ export default {
         this.expenseType.Date = this.expenseType.Date.map(
           (row) => row.match(/^\d{4}\/\d{2}/g)[0]
         );
+
         //収入データの各項目(日付，項目)の種類を把握
         _keys = this.incomeList
           .map((row) => Object.keys(row))
@@ -139,6 +141,11 @@ export default {
         this.incomeType.Date = this.incomeType.Date.map(
           (row) => row.match(/^\d{4}\/\d{2}/g)[0]
         );
+
+        this.expenseType.Date.push("");
+        this.expenseType.Item.push("");
+        this.incomeType.Date.push("");
+        this.incomeType.Item.push("");
       } catch (err) {
         console.log(err?.message);
       }
@@ -153,17 +160,11 @@ export default {
     },
     async searchItem(date, searchType, type) {
       try {
-        console.log("test1");
         const url = `/api/searching/${this.$store.state.userId}/${type}?date=${date}&kind=${searchType}`;
-        console.log(url);
         const { data } = await axios.get(url);
-        console.log(data);
-        console.log("test2");
         if (type === "expense") {
           this.expenseList.splice(0, this.expenseList.length);
           this.expenseList = [...data];
-          console.log(this.expenseList);
-
           this.expenseSum = this.expenseList.reduce(
             (previous, current) => previous + Number(current.Price),
             0
@@ -171,13 +172,11 @@ export default {
         } else {
           this.incomeList.splice(0, this.incomeList.length);
           this.incomeList = [...data];
-          console.log(this.incomeList);
           this.incomeSum = this.incomeList.reduce(
             (previous, current) => previous + Number(current.Price),
             0
           );
         }
-        console.log("test3");
       } catch (err) {
         console.log(err?.message);
       }
