@@ -160,11 +160,22 @@ export default {
         console.log(data);
         console.log("test2");
         if (type === "expense") {
-          this.expenseList.splice(0, this.expenseList.length, data);
+          this.expenseList.splice(0, this.expenseList.length);
+          this.expenseList = [...data];
           console.log(this.expenseList);
+
+          this.expenseSum = this.expenseList.reduce(
+            (previous, current) => previous + Number(current.Price),
+            0
+          );
         } else {
-          this.incomeList.splice(0, this.incomeList.length, data);
+          this.incomeList.splice(0, this.incomeList.length);
+          this.incomeList = [...data];
           console.log(this.incomeList);
+          this.incomeSum = this.incomeList.reduce(
+            (previous, current) => previous + Number(current.Price),
+            0
+          );
         }
         console.log("test3");
       } catch (err) {
