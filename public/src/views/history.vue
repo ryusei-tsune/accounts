@@ -157,11 +157,14 @@ export default {
         const url = `/api/searching/${this.$store.state.userId}/${type}?date=${date}&kind=${searchType}`;
         console.log(url);
         const { data } = await axios.get(url);
+        console.log(data);
         console.log("test2");
         if (type === "expense") {
           this.expenseList.splice(0, this.expenseList.length, data);
+          console.log(this.expenseList);
         } else {
           this.incomeList.splice(0, this.incomeList.length, data);
+          console.log(this.incomeList);
         }
         console.log("test3");
       } catch (err) {

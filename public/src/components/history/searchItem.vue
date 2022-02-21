@@ -54,7 +54,7 @@ export default {
   },
   mounted() {},
   methods: {
-    async Search() {
+    Search() {
       this.$emit("search", this.searchDate, this.searchType, this.type);
     },
   },
