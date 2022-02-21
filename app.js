@@ -3,10 +3,12 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var history = require("connect-history-api-fallback");
 
 var indexRouter = require("./routes/index");
 var apiRouter = require("./routes/api/index");
 var app = express();
+app.use(history());
 
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
