@@ -100,7 +100,6 @@ export default {
         const { data } = await axios.get(
           `/api/acquisition/${this.$store.state.userId}`
         );
-
         //データの取得
         this.incomeList = [...data.income];
         this.expenseList = [...data.expense];
@@ -113,7 +112,6 @@ export default {
           (previous, current) => previous + Number(current.Price),
           0
         );
-
         //支出データの各項目(日付，項目)の種類を把握
         let _keys = this.expenseList
           .map((row) => Object.keys(row))
@@ -125,7 +123,9 @@ export default {
             .filter((item) => !!item);
           //.filter((item) => this.expenseType[k].includes(item));
         });
-
+        this.expenseType.Date = this.expenseType.Date.map(
+          (row) => row.match(/^\d{4}\/\d{2}/g)[0]
+        );
         //収入データの各項目(日付，項目)の種類を把握
         _keys = this.incomeList
           .map((row) => Object.keys(row))
@@ -136,6 +136,9 @@ export default {
             .map((row) => row[k])
             .filter((item) => !!item);
         });
+        this.incomeType.Date = this.incomeType.Date.map(
+          (row) => row.match(/^\d{4}\/\d{2}/g)[0]
+        );
       } catch (err) {
         console.log(err?.message);
       }
@@ -150,13 +153,17 @@ export default {
     },
     async searchItem(date, searchType, type) {
       try {
+        console.log("test1");
         const url = `/api/searching/${this.$store.state.userId}/${type}?date=${date}&kind=${searchType}`;
+        console.log(url);
         const { data } = await axios.get(url);
+        console.log("test2");
         if (type === "expense") {
           this.expenseList.splice(0, this.expenseList.length, data);
         } else {
           this.incomeList.splice(0, this.incomeList.length, data);
         }
+        console.log("test3");
       } catch (err) {
         console.log(err?.message);
       }
