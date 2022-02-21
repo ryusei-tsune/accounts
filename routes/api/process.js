@@ -56,6 +56,7 @@ router.get("/searching/:id/:type", async (req, res, next) => {
     res.json(data);
   } catch (err) {
     console.log(err?.message);
+    res.json({ err: true });
   }
 });
 
