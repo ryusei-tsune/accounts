@@ -1,21 +1,21 @@
 <template>
   <div>
     <v-row justify="center">
-      <v-col cols="3">
+      <v-col cols="4">
         <v-select
           v-model="searchDate"
           :items="search.date"
           placeholder="期間"
         ></v-select>
       </v-col>
-      <v-col cols="3">
+      <v-col cols="4">
         <v-select
           v-model="searchType"
           :items="search.item"
           placeholder="項目"
         ></v-select>
       </v-col>
-      <v-col cols="3">
+      <v-col cols="4">
         <v-btn color="cyan lighten-3" @click="Search()">絞り込み</v-btn>
       </v-col>
     </v-row>
